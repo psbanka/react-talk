@@ -9,16 +9,13 @@ describe('hello', function() {
         var Hello = require('../hello.js');
         var TestUtils = React.addons.TestUtils;
 
-        expect(true).toBeTruthy();
-        /*
         // Render a hello object
         var hello = TestUtils.renderIntoDocument(
             <Hello name="John" />
         );
 
         var helloItem = TestUtils.findRenderedDOMComponentWithTag(hello, 'div');
-        expect(label.getDOMNode().textContent).toEqual('Hello John');
-        */
+        expect(helloItem.getDOMNode().textContent).toEqual('Hello John');
     });
 
 });
