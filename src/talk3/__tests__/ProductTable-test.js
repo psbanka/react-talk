@@ -11,17 +11,21 @@ describe('ProductTable', function() {
         category: 'cars',
         name: 'civvic',
         price: '$25000.00',
-        stocked: true,
+        stocked: false,
     }, {
         category: 'cars',
         name: 'corolla',
         price: '$29000.00',
-        stocked: false,
+        stocked: true,
     }];
 
-    it('makes four rows', function() {
+    it('makes four rows when the filter is blank', function() {
         var productTable = TestUtils.renderIntoDocument(
-            <ProductTable products={cars} />
+            <ProductTable
+                products={cars}
+                filterText = {''}
+                inStockOnly = {false}
+             />
         );
         var tableRows = TestUtils.scryRenderedDOMComponentsWithTag(productTable, 'tr');
         expect(tableRows.length).toEqual(4);
@@ -30,5 +34,43 @@ describe('ProductTable', function() {
         expect(tableRows[0].getDOMNode().textContent).toEqual('NamePrice');
         expect(tableRows[1].getDOMNode().textContent).toEqual('cars');
         expect(tableRows[2].getDOMNode().textContent).toEqual('civvic$25000.00');
+    });
+
+    it('makes only three rows when the filter is useful', function() {
+        var productTable = TestUtils.renderIntoDocument(
+            <ProductTable
+                products={cars}
+                filterText = {'olla'}
+                inStockOnly = {false}
+             />
+        );
+        var tableRows = TestUtils.scryRenderedDOMComponentsWithTag(productTable, 'tr');
+        expect(tableRows.length).toEqual(3);
+        expect(tableRows[2].getDOMNode().textContent).toEqual('corolla$29000.00');
+    });
+
+    it('makes only two rows when the filter eliminates all', function() {
+        var productTable = TestUtils.renderIntoDocument(
+            <ProductTable
+                products={cars}
+                filterText = {'theraininspain'}
+                inStockOnly = {false}
+             />
+        );
+        var tableRows = TestUtils.scryRenderedDOMComponentsWithTag(productTable, 'tr');
+        expect(tableRows.length).toEqual(1);
+    });
+
+    it('can filter based on stock', function() {
+        var productTable = TestUtils.renderIntoDocument(
+            <ProductTable
+                products={cars}
+                filterText = {''}
+                inStockOnly = {true}
+             />
+        );
+        var tableRows = TestUtils.scryRenderedDOMComponentsWithTag(productTable, 'tr');
+        expect(tableRows.length).toEqual(3);
+        expect(tableRows[2].getDOMNode().textContent).toEqual('corolla$29000.00');
     });
 });
