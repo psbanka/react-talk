@@ -27,6 +27,7 @@ describe('ProductTable', function() {
         expect(tableRows.length).toEqual(4);
 
         // spot-check
+        expect(tableRows[0].getDOMNode().textContent).toEqual('NamePrice');
         expect(tableRows[1].getDOMNode().textContent).toEqual('cars');
         expect(tableRows[2].getDOMNode().textContent).toEqual('civvic$25000.00');
     });
