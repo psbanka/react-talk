@@ -10,3 +10,5 @@ build:
 test:
 	./node_modules/jest-cli/bin/jest.js
 
+test-watch:
+	fswatch-run src/talk3/*.js src/talk3/__tests__/*.js ./node_modules/jest-cli/bin/jest.js

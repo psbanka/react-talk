@@ -12,8 +12,8 @@ var stylus = require('gulp-stylus');  // To compile Stylus CSS.
  
 var paths = {
     css: ['src/css/**/*.styl'],
-    app_js: ['./src/talk2/app.js'],
-    js: ['src/talk2/*.js'],
+    app_js: ['./src/talk3/app.js'],
+    js: ['src/talk3/*.js'],
 };
  
 // An example of a dependency task, it will be run before the css/js tasks.
